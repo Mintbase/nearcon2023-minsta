@@ -18,9 +18,12 @@ export const FeedScroll = ({ blockedNfts }: {blockedNfts: string[]}) => {
  function calculateFilteredData(items:any, blockedNfts:string[]) {
   const uniqueMetadataIds = new Set<string>();
 
-  console.log(!!blockedNfts, 'blockedNfts')
+  // console.log(!!blockedNfts, blockedNfts, 'blockedNfts')
 
   const filteredData = items?.filter((token:any) => {
+          console.log( blockedNfts?.length, blockedNfts.includes(token?.metadata_id), token.metadata_id, 'blockedNfts 2')
+
+
     if (
       uniqueMetadataIds.has(token.metadata_id) ||
       (!!blockedNfts && blockedNfts.includes(token?.metadata_id))
@@ -47,6 +50,10 @@ const filteredData = calculateFilteredData(items, blockedNfts);
   return (
     <>
       {filteredData?.map((token: any, index: number) => {
+
+
+
+
         return !blockedNfts.includes(token?.metadata_id)? (
           <MemoizedImageThumb
             key={token?.metadata_id}
