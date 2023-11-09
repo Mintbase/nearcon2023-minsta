@@ -4,7 +4,7 @@ import { useMemo, useRef } from "react";
 import { useIntersectionObserver } from "usehooks-ts";
 import { MemoizedImageThumb } from "./ImageThumb";
 
-export const FeedScroll = ({ blockedNfts }: any) => {
+export const FeedScroll = ({ blockedNfts }: {blockedNfts: string[]}) => {
   const ref = useRef<HTMLDivElement | null>(null);
   const entry = useIntersectionObserver(ref, {});
   const isVisible = !!entry?.isIntersecting;
@@ -15,24 +15,28 @@ export const FeedScroll = ({ blockedNfts }: any) => {
     { query: FETCH_FEED }
   );
 
-  const memoizedData = useMemo(() => {
-    const uniqueMetadataIds = new Set<string>();
+ function calculateFilteredData(items:any, blockedNfts:string[]) {
+  const uniqueMetadataIds = new Set<string>();
 
-    const filteredData = items?.filter((token: any) => {
-      if (
-        uniqueMetadataIds.has(token.metadata_id) ||
-        (!!blockedNfts && blockedNfts.includes(token?.metadata_id))
-      ) {
-        return false;
-      } else {
-        uniqueMetadataIds.add(token.metadata_id);
-      }
+  const filteredData = items?.filter((token:any) => {
+    if (
+      uniqueMetadataIds.has(token.metadata_id) ||
+      (!!blockedNfts && blockedNfts.includes(token?.metadata_id))
+    ) {
+      return false;
+    } else {
+      uniqueMetadataIds.add(token.metadata_id);
+    }
 
-      return true;
-    });
+    return true;
+  });
 
-    return filteredData;
-  }, [blockedNfts, items]);
+  return filteredData;
+}
+
+// Usage in your component:
+const filteredData = calculateFilteredData(items, blockedNfts);
+
 
   if (error) {
     return <> Error.</>;
@@ -40,7 +44,7 @@ export const FeedScroll = ({ blockedNfts }: any) => {
 
   return (
     <>
-      {memoizedData?.map((token: any, index: number) => {
+      {filteredData?.map((token: any, index: number) => {
         return !blockedNfts.includes(token?.metadata_id)? (
           <MemoizedImageThumb
             key={token?.metadata_id}
