@@ -41,7 +41,7 @@ export const FeedScroll = ({ blockedNfts }: any) => {
   return (
     <>
       {memoizedData?.map((token: any, index: number) => {
-        return !!blockedNfts.includes(token?.metadata_id)? (
+        return !blockedNfts.includes(token?.metadata_id)? (
           <MemoizedImageThumb
             key={token?.metadata_id}
             token={token}
