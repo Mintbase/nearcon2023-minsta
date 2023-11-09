@@ -18,6 +18,8 @@ export const FeedScroll = ({ blockedNfts }: {blockedNfts: string[]}) => {
  function calculateFilteredData(items:any, blockedNfts:string[]) {
   const uniqueMetadataIds = new Set<string>();
 
+  console.log(!!blockedNfts, 'blockedNfts')
+
   const filteredData = items?.filter((token:any) => {
     if (
       uniqueMetadataIds.has(token.metadata_id) ||
