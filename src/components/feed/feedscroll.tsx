@@ -41,13 +41,13 @@ export const FeedScroll = ({ blockedNfts }: any) => {
   return (
     <>
       {memoizedData?.map((token: any, index: number) => {
-        return (
+        return !!blockedNfts.includes(token?.metadata_id)? (
           <MemoizedImageThumb
             key={token?.metadata_id}
             token={token}
             index={index}
           />
-        );
+        ): null;
       })}
       <div ref={ref}>
         {loadingItems?.map((item, i) => (
