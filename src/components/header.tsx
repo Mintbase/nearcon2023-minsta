@@ -90,7 +90,7 @@ const Header = () => {
         {renderHeaderButtons()}
       </header>
       {isClosed ? (
-        <div className="text-center text-mainText w-full absolute m-auto left-0 right-0 notify text-sm font-sans">
+        <div className="text-center text-mainText w-full absolute m-auto left-0 right-0 notify text-sm font-sans my-2">
           Minting is closed. Thanks to everyone who participated.
         </div>
       ) : null}
