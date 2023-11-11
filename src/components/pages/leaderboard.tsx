@@ -19,7 +19,7 @@ export const LeaderboardPage = () => {
 
   return (
     <>
-      <main className="pt-20 flex flex-col gap-6 items-center justify-center text-mainText">
+      <main className="pt-24 flex flex-col gap-6 items-center justify-center text-mainText">
         <div>Leaderboard</div>
         <div className="flex text-center gap-10">
           <ViewYourNfts />
