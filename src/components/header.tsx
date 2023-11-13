@@ -89,7 +89,7 @@ const Header = () => {
       <header className="fixed left-0 top-0 flex w-full justify-center h-12 bg-primary text-headerText py-8 border-b border-[#D2D4DA]">
         {renderHeaderButtons()}
       </header>
-      {isClosed ? (
+      {isClosed && !pathname.includes("meta") ? (
         <div className="text-center text-mainText w-full absolute mx-auto left-0 right-0 notify text-sm font-sans my-2">
           Minting is closed. Thanks to everyone who participated.
         </div>
